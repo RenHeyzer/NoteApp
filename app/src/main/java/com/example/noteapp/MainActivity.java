@@ -12,6 +12,8 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.noteapp.databinding.NavHeaderMainBinding;
@@ -36,7 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
-    private NavHeaderMainBinding navBinding;
+    private ImageView imageView;
+
+    Uri uri;
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -44,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        navBinding = NavHeaderMainBinding.inflate(getLayoutInflater());
-        setContentView(navBinding.getRoot());
+
+
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -63,6 +67,35 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
         binding.appBarMain.fab.setOnClickListener(view -> navController.navigate(R.id.home_to_noteFrgament));
         setVisibilityGone(navController);
+        getImage();
+    }
+
+    private void getImage() {
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        View view = navigationView.getHeaderView(0);
+        imageView = view.findViewById(R.id.imageView);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.addCategory("android.intent.category.OPENABLE");
+                intent.setType("image/*");
+                startActivityForResult(intent, 1);
+            }
+        });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && data != null ){
+                Uri uri;
+                this.uri = uri = data.getData();
+                imageView.setImageURI(uri);
+        }
     }
 
     private void setVisibilityGone(NavController navController) {

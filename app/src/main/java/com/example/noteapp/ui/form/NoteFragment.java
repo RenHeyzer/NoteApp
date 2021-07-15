@@ -28,14 +28,19 @@ public class NoteFragment extends Fragment {
     }
 
     private void initClickListener(NavController navController) {
-        binding.txtDone.setOnClickListener(v -> {
-            String title = binding.etTitle.getText().toString();
-            taskModel = new TaskModel(title);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("done", taskModel);
-            getParentFragmentManager().setFragmentResult("res", bundle);
-            navController.navigateUp();
-        });
-    }
 
+        binding.txtDone.setOnClickListener(v -> {
+            if (binding.etTitle.getText().toString().trim().equals("")) {
+                binding.etTitle.setError("Введите текст");
+            } else {
+                String title = binding.etTitle.getText().toString();
+                taskModel = new TaskModel(title);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("done", taskModel);
+                getParentFragmentManager().setFragmentResult("res", bundle);
+                navController.navigateUp();
+            }
+        });
+
+    }
 }

@@ -30,7 +30,6 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-    private NavHeaderMainBinding navBinding;
     private TaskAdapter adapter = new TaskAdapter();
 
     private ArrayList<TaskModel> list = new ArrayList<>();
@@ -39,12 +38,12 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         setupRecycler();
-        getDatta();
+        getData();
         initSearch();
         return binding.getRoot();
     }
 
-    private void getDatta() {
+    private void getData() {
         getParentFragmentManager().setFragmentResultListener("res", getViewLifecycleOwner(), (requestKey, result) -> {
             TaskModel taskModel = (TaskModel) result.getSerializable("done");
             list.add(taskModel);
