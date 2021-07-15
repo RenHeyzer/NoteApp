@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="20dp"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/item_title"
+        android:text="@string/item_title"
+        android:padding="10dp"
+        android:textSize="20sp"
+        android:background="@drawable/backgroung_of_notes"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

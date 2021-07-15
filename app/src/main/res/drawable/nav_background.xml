@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient android:type="linear" android:startColor="@color/nav_background1" android:endColor="@color/nav_background2" />
+</shape>
