@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".onboard.ThirdFragment">
+
+    <TextView
+        android:id="@+id/txt_start"
+        android:textSize="16sp"
+        android:textColor="@color/txt_start_working"
+        android:textStyle="bold"
+        android:text="@string/start_working"
+        android:layout_marginTop="40dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/txt_thirdFragment"
+        android:layout_height="wrap_content"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_third"
+        app:lottie_autoPlay="true"
+        app:lottie_repeatCount="1000"
+        android:layout_marginBottom="170dp"
+        android:elevation="5dp"
+        app:lottie_rawRes="@raw/on_boarding_animation_top_stocks"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="320dp"
+        android:layout_height="300dp"/>
+
+    <TextView
+        android:id="@+id/txt_thirdFragment"
+        android:textSize="19sp"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lottie_third"
+        android:text="@string/text_of_third_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

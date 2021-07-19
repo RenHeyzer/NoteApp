@@ -1,25 +1,23 @@
 package com.example.noteapp;
 
-import android.content.ContentResolver;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
+import android.util.Base64;
 import android.view.View;
 import android.view.Menu;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.example.noteapp.databinding.NavHeaderMainBinding;
+import com.bumptech.glide.Glide;
+import com.example.noteapp.utils.PreferencesHelper;
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -27,11 +25,13 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.noteapp.databinding.ActivityMainBinding;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,21 +39,16 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     private ImageView imageView;
+    private SharedPreferences sharedPref;
+    private Uri uri;
+    final int SELECT_PHOTO = 1;
 
-    Uri uri;
-
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         setSupportActionBar(binding.appBarMain.toolbar);
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
@@ -63,11 +58,28 @@ public class MainActivity extends AppCompatActivity {
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        PreferencesHelper prefHelper = new PreferencesHelper();
+        prefHelper.unit(this);
+        if (!prefHelper.isShown()) {
+            navController.navigate(R.id.onBoardFragment);
+        }
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
         binding.appBarMain.fab.setOnClickListener(view -> navController.navigate(R.id.home_to_noteFrgament));
         setVisibilityGone(navController);
         getImage();
+        setSaveImage();
+        destination(navController);
+    }
+
+    private void setVisibilityGone(NavController navController) {
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            if (destination.getId() == R.id.noteFragment) {
+                binding.appBarMain.toolbar.setVisibility(View.GONE);
+            } else {
+                binding.appBarMain.toolbar.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     private void getImage() {
@@ -75,48 +87,68 @@ public class MainActivity extends AppCompatActivity {
         View view = navigationView.getHeaderView(0);
         imageView = view.findViewById(R.id.imageView);
 
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                intent.addCategory("android.intent.category.OPENABLE");
-                intent.setType("image/*");
-                startActivityForResult(intent, 1);
+        imageView.setOnClickListener(v -> {
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            intent.addCategory("android.intent.category.OPENABLE");
+            intent.setType("image/*");
+            startActivityForResult(intent, SELECT_PHOTO);
+        });
+    }
+
+    private void setSaveImage() {
+        sharedPref = getSharedPreferences("profileImage", MODE_PRIVATE);
+
+        if (!sharedPref.getString("db", "").equals("")) {
+            byte[] decodedString = Base64.decode(sharedPref.getString("db", ""), Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            imageView.setImageBitmap(decodedByte);
+        }
+    }
+
+    private void destination(NavController navController) {
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            if (controller.getGraph().getStartDestination() == destination.getId()) {
+                binding.appBarMain.fab.show();
+            } else {
+                binding.appBarMain.fab.hide();
             }
         });
-
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && data != null ){
-                Uri uri;
-                this.uri = uri = data.getData();
-                imageView.setImageURI(uri);
+        switch (requestCode) {
+            case SELECT_PHOTO:
+                if (resultCode == RESULT_OK) {
+                    try {
+                        final Uri imageUri = data.getData();
+                        final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                        final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                        Glide.with(this)
+                                .load(imageUri)
+                                .placeholder(R.drawable.ic_baseline_add_a_photo_24)
+                                .centerCrop()
+                                .into(imageView);
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        selectedImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                        byte[] b = baos.toByteArray();
+                        String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
+                        sharedPref.edit().putString("db", encodedImage).commit();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
         }
     }
 
-    private void setVisibilityGone(NavController navController) {
-        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            if (destination.getId() == R.id.noteFragment) {
-                binding.appBarMain.toolbar.setVisibility(View.GONE);
-                binding.appBarMain.fab.setVisibility(View.GONE);
-            } else {
-                binding.appBarMain.toolbar.setVisibility(View.VISIBLE);
-                binding.appBarMain.fab.setVisibility(View.VISIBLE);
-            }
-        });
-    }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
 
     @Override
     public boolean onSupportNavigateUp() {

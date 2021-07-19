@@ -34,12 +34,11 @@ public class ShareFragment extends Fragment {
         final TextView textView = binding.textShare;
         shareViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
-            public void onChanged(@Nullable String s) {
+            public void onChanged(String s) {
                 textView.setText(s);
             }
         });
         return root;
-
     }
 
     @Override

@@ -25,6 +25,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <ImageView
+                    android:id="@+id/iv_arrow_back"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:paddingEnd="15dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/ic_baseline_arrow_back_24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
                 <TextView
                     android:id="@+id/txt_done"
                     android:layout_width="wrap_content"
@@ -43,9 +55,10 @@
     <EditText
         android:id="@+id/et_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_height="match_parent"
+        android:gravity="start"
+        android:background="@null"
+        android:layout_marginTop="15sp"
         android:layout_marginHorizontal="15dp"
-        android:layout_marginBottom="15dp"
-        android:hint="@string/input_title" />
+        android:hint="@string/input_text" />
 </LinearLayout>

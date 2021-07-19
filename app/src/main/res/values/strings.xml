@@ -17,6 +17,11 @@
     <string name="item_description">Описание</string>
     <string name="item_title">Оглавление</string>
     <string name="done">Готово</string>
-    <string name="input_title">Введите оглавление</string>
+    <string name="input_text">Введите текст</string>
     <string name="search_notes">Поиск заметок</string>
+    <string name="start_working">Начать работу</string>
+    <string name="skip1">Пропустить</string>
+    <string name="text_of_first_fragment">Очень удобный фунуционал</string>
+    <string name="text_of_third_fragment">Куча функций и интересных фишек</string>
+    <string name="text_of_second_fragment">Быстрый, качественный продукт</string>
 </resources>

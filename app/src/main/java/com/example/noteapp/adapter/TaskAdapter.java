@@ -15,9 +15,12 @@ import java.util.ArrayList;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
     ArrayList<TaskModel> list = new ArrayList<>();
-    ItemTaskBinding binding;
+    private int type;
 
-
+    public void addText(TaskModel taskModel) {
+        list.add(taskModel);
+        notifyDataSetChanged();
+    }
 
     @Override
     public TaskViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -38,12 +41,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     public void filterList(ArrayList<TaskModel> filteredList) {
         list = filteredList;
         notifyDataSetChanged();
-
-    }
-    public void addText(TaskModel taskModel) {
-        list.add(taskModel);
-        notifyDataSetChanged();
-
     }
 
     public class TaskViewHolder extends RecyclerView.ViewHolder {

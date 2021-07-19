@@ -40,4 +40,14 @@
         android:name="com.example.noteapp.ui.form.NoteFragment"
         android:label=""
         tools:layout="@layout/fragment_note" />
+    <fragment
+        android:id="@+id/onBoardFragment"
+        android:name="com.example.noteapp.onboard.OnBoardFragment"
+        android:label="fragment_on_board"
+        tools:layout="@layout/fragment_on_board" >
+
+        <action
+            android:id="@+id/action_onBoardFragment_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
 </navigation>

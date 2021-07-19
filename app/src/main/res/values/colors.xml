@@ -16,6 +16,7 @@
     <color name="background">#0E0C0C</color>
     <color name="background_of_notes">#191818</color>
     <color name="whiteGrayLight">#DADADA</color>
+    <color name="txt_start_working">#8E8B8B</color>
 
 
 </resources>

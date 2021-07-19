@@ -6,7 +6,6 @@
     android:paddingTop="20dp"
     android:layout_height="wrap_content">
 
-
     <TextView
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/item_title"

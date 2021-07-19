@@ -11,17 +11,28 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.airbnb.lottie.L;
+import com.example.noteapp.R;
 import com.example.noteapp.databinding.NavHeaderMainBinding;
 import com.example.noteapp.model.TaskModel;
 import com.example.noteapp.adapter.TaskAdapter;
 import com.example.noteapp.databinding.FragmentHomeBinding;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -31,6 +42,7 @@ public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
     private TaskAdapter adapter = new TaskAdapter();
+    private boolean isLinearLayout = true;
 
     private ArrayList<TaskModel> list = new ArrayList<>();
 
@@ -70,19 +82,44 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    private void filter(String title) {
+    private void filter(String text) {
         ArrayList<TaskModel> filteredList = new ArrayList<>();
         for (TaskModel item : list) {
-            if (item.getTitle().toLowerCase().contains(title.toLowerCase())) {
+            if (item.getTitle().toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(item);
             }
         }
         adapter.filterList(filteredList);
     }
 
-
     private void setupRecycler() {
+        binding.rvRecycler.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.rvRecycler.setAdapter(adapter);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_settings) {
+            if (isLinearLayout) {
+                item.setIcon(R.drawable.ic_baseline_format_list_bulleted_24);
+                binding.rvRecycler.setLayoutManager(new StaggeredGridLayoutManager(
+                        2, StaggeredGridLayoutManager.VERTICAL));
+                binding.rvRecycler.setAdapter(adapter);
+                isLinearLayout = false;
+            } else {
+                item.setIcon(R.drawable.ic_baseline_dashboard_24);
+                binding.rvRecycler.setLayoutManager(new LinearLayoutManager(requireContext()));
+                binding.rvRecycler.setAdapter(adapter);
+                isLinearLayout = true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
