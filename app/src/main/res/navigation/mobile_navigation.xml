@@ -11,7 +11,7 @@
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" >
         <action android:id="@+id/home_to_noteFrgament"
-            app:destination="@id/noteFragment"/>
+            app:destination="@id/note_fragment"/>
     </fragment>
 
     <fragment
@@ -36,18 +36,22 @@
         android:label="@string/menu_aboutDev"
         tools:layout="@layout/fragment_slideshow" />
     <fragment
-        android:id="@+id/noteFragment"
+        android:id="@+id/note_fragment"
         android:name="com.example.noteapp.ui.form.NoteFragment"
         android:label=""
-        tools:layout="@layout/fragment_note" />
+        tools:layout="@layout/fragment_note" >
+        <action
+            android:id="@+id/action_note_fragment_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
     <fragment
-        android:id="@+id/onBoardFragment"
+        android:id="@+id/on_board_fragment"
         android:name="com.example.noteapp.onboard.OnBoardFragment"
         android:label="fragment_on_board"
         tools:layout="@layout/fragment_on_board" >
 
         <action
-            android:id="@+id/action_onBoardFragment_to_nav_home"
+            android:id="@+id/action_on_board_fragment_to_nav_home_to_nav_home"
             app:destination="@id/nav_home" />
     </fragment>
 </navigation>

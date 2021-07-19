@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         PreferencesHelper prefHelper = new PreferencesHelper();
         prefHelper.unit(this);
         if (!prefHelper.isShown()) {
-            navController.navigate(R.id.onBoardFragment);
+            navController.navigate(R.id.on_board_fragment);
         }
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setVisibilityGone(NavController navController) {
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            if (destination.getId() == R.id.noteFragment) {
+            if (destination.getId() == R.id.note_fragment) {
                 binding.appBarMain.toolbar.setVisibility(View.GONE);
             } else {
                 binding.appBarMain.toolbar.setVisibility(View.VISIBLE);
