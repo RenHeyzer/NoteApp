@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.example.noteapp.ItemClickListener;
+import com.example.noteapp.interfaces.ItemClickListener;
 import com.example.noteapp.R;
 import com.example.noteapp.models.TaskModel;
 import com.example.noteapp.adapters.TaskAdapter;
@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.noteapp.ui.form.NoteFragment.BUNDLE_KEY;
-import static com.example.noteapp.ui.form.NoteFragment.REQUEST_KEY;
 
 public class HomeFragment extends Fragment implements ItemClickListener {
 
@@ -51,7 +50,6 @@ public class HomeFragment extends Fragment implements ItemClickListener {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setupRecycler();
-        getData();
         getNotesFromDB();
         initSearch();
         deleteData();
@@ -78,19 +76,10 @@ public class HomeFragment extends Fragment implements ItemClickListener {
     }
 
     private void getNotesFromDB() {
-        MyApp.getInstance().taskDao().getAll().observe(requireActivity(), new Observer<List<TaskModel>>() {
-            @Override
-            public void onChanged(List<TaskModel> taskModels) {
-                adapter.setList(taskModels);
-                list = taskModels;
-            }
+        MyApp.getInstance().taskDao().getAll().observe(requireActivity(), taskModels -> {
+            adapter.setList(taskModels);
+            list = taskModels;
         });
-    }
-
-    private void getData() {
-        getParentFragmentManager().setFragmentResultListener(REQUEST_KEY, getViewLifecycleOwner(),
-                (requestKey, result) -> {
-                });
     }
 
     private void initSearch() {

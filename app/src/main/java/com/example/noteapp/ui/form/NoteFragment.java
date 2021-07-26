@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.noteapp.R;
 import com.example.noteapp.models.TaskModel;
 import com.example.noteapp.databinding.FragmentNoteBinding;
@@ -22,7 +24,6 @@ public class NoteFragment extends Fragment {
     private FragmentNoteBinding binding;
     private TaskModel taskModel;
     private TaskModel model;
-    private TextView txtTitle;
     public final static String REQUEST_KEY = "res";
     public final static String BUNDLE_KEY = "done";
     public final static String BUNDLE_UPDATE_KEY = "updateDone";
@@ -69,6 +70,10 @@ public class NoteFragment extends Fragment {
         binding.txtDone.setOnClickListener(v -> {
             if (binding.etTitle.getText().toString().trim().equals("")) {
                 binding.etTitle.setError("Введите текст");
+                YoYo.with(Techniques.SlideInDown  )
+                        .duration(1008)
+                        .repeat(1)
+                        .playOn(binding.txtDone);
                 return;
             }
             String title = binding.etTitle.getText().toString();
