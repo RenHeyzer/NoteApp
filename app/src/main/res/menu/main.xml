@@ -5,6 +5,6 @@
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:icon="@drawable/ic_baseline_dashboard_24"
-        android:title="@string/action_settings"
+        android:title=""
         app:showAsAction="ifRoom"/>
 </menu>

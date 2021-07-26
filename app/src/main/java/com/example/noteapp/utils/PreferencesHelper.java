@@ -16,4 +16,16 @@ public class PreferencesHelper {
     public boolean isShown(){
         return sharedPreferences.getBoolean("isShown", false);
     }
+
+    public void onSavePlaceHolder(){
+        sharedPreferences.edit().putBoolean("save", false).apply();
+    }
+
+    public void onSaveImage(){
+        sharedPreferences.edit().putBoolean("save", true).apply();
+    }
+
+    public boolean isShownImage(){
+        return sharedPreferences.getBoolean("save", false);
+    }
 }

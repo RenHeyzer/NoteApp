@@ -1,66 +1,96 @@
 package com.example.noteapp.ui.home;
 
-import android.content.ContentResolver;
-import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.airbnb.lottie.L;
+import com.example.noteapp.ItemClickListener;
 import com.example.noteapp.R;
-import com.example.noteapp.databinding.NavHeaderMainBinding;
-import com.example.noteapp.model.TaskModel;
-import com.example.noteapp.adapter.TaskAdapter;
+import com.example.noteapp.models.TaskModel;
+import com.example.noteapp.adapters.TaskAdapter;
 import com.example.noteapp.databinding.FragmentHomeBinding;
+import com.example.noteapp.room.MyApp;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
-public class HomeFragment extends Fragment {
+import static com.example.noteapp.ui.form.NoteFragment.BUNDLE_KEY;
+import static com.example.noteapp.ui.form.NoteFragment.REQUEST_KEY;
+
+public class HomeFragment extends Fragment implements ItemClickListener {
 
     private FragmentHomeBinding binding;
-    private TaskAdapter adapter = new TaskAdapter();
+    private TaskAdapter adapter;
     private boolean isLinearLayout = true;
+    private boolean isList = true;
+    private int position;
 
-    private ArrayList<TaskModel> list = new ArrayList<>();
+    private List<TaskModel> list = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        setupRecycler();
-        getData();
-        initSearch();
         return binding.getRoot();
     }
 
-    private void getData() {
-        getParentFragmentManager().setFragmentResultListener("res", getViewLifecycleOwner(), (requestKey, result) -> {
-            TaskModel taskModel = (TaskModel) result.getSerializable("done");
-            list.add(taskModel);
-            adapter.addText(taskModel);
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setupRecycler();
+        getData();
+        getNotesFromDB();
+        initSearch();
+        deleteData();
+    }
+
+    private void deleteData() {
+        ItemTouchHelper touchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
+                0, ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
+                                  RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+                TaskModel mtaskModel = adapter.getWordAtPosition(position);
+                MyApp.getInstance().taskDao().delete(mtaskModel);
+
+            }
         });
+        touchHelper.attachToRecyclerView(binding.rvRecycler);
+    }
+
+    private void getNotesFromDB() {
+        MyApp.getInstance().taskDao().getAll().observe(requireActivity(), new Observer<List<TaskModel>>() {
+            @Override
+            public void onChanged(List<TaskModel> taskModels) {
+                adapter.setList(taskModels);
+                list = taskModels;
+            }
+        });
+    }
+
+    private void getData() {
+        getParentFragmentManager().setFragmentResultListener(REQUEST_KEY, getViewLifecycleOwner(),
+                (requestKey, result) -> {
+                });
     }
 
     private void initSearch() {
@@ -100,6 +130,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        adapter = new TaskAdapter(isList, HomeFragment.this);
         setHasOptionsMenu(true);
     }
 
@@ -125,6 +156,15 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+    }
 
+    @Override
+    public void onItemClick(int position, TaskModel taskModel) {
+        this.position = position;
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(BUNDLE_KEY, taskModel);
+        NavController navController = Navigation.findNavController(
+                requireActivity(), R.id.nav_host_fragment_content_main);
+        navController.navigate(R.id.home_to_noteFragment, bundle);
     }
 }

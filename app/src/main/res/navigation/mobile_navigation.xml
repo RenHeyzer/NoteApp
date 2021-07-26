@@ -10,7 +10,7 @@
         android:name="com.example.noteapp.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" >
-        <action android:id="@+id/home_to_noteFrgament"
+        <action android:id="@+id/home_to_noteFragment"
             app:destination="@id/note_fragment"/>
     </fragment>
 
@@ -19,9 +19,6 @@
         android:name="com.example.noteapp.ui.share.ShareFragment"
         android:label="@string/menu_share"
         tools:layout="@layout/fragment_share">
-        <action
-            android:id="@+id/action_nav_share_to_nav_gallery"
-            app:destination="@id/nav_gallery" />
     </fragment>
 
     <fragment
@@ -35,23 +32,18 @@
         android:name="com.example.noteapp.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_aboutDev"
         tools:layout="@layout/fragment_slideshow" />
+
     <fragment
         android:id="@+id/note_fragment"
         android:name="com.example.noteapp.ui.form.NoteFragment"
         android:label=""
         tools:layout="@layout/fragment_note" >
-        <action
-            android:id="@+id/action_note_fragment_to_nav_home"
-            app:destination="@id/nav_home" />
     </fragment>
+
     <fragment
         android:id="@+id/on_board_fragment"
         android:name="com.example.noteapp.onboard.OnBoardFragment"
         android:label="fragment_on_board"
         tools:layout="@layout/fragment_on_board" >
-
-        <action
-            android:id="@+id/action_on_board_fragment_to_nav_home_to_nav_home"
-            app:destination="@id/nav_home" />
     </fragment>
 </navigation>

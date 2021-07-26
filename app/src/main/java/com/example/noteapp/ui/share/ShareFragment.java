@@ -2,7 +2,6 @@ package com.example.noteapp.ui.share;
 
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -12,10 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.noteapp.R;
 import com.example.noteapp.databinding.FragmentShareBinding;
-import com.example.noteapp.databinding.FragmentSlideshowBinding;
-import com.example.noteapp.ui.slideshow.SlideshowViewModel;
 
 
 public class ShareFragment extends Fragment {
