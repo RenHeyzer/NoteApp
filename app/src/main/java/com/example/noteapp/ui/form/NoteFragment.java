@@ -3,29 +3,19 @@ package com.example.noteapp.ui.form;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.inputmethodservice.Keyboard;
 import android.os.Build;
 import android.os.Bundle;
 
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
-import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 
-import android.provider.ContactsContract;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
@@ -38,8 +28,7 @@ import android.view.inputmethod.InputMethodManager;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.example.noteapp.R;
-import com.example.noteapp.adapters.TaskAdapter;
-import com.example.noteapp.adapters.ViewPagerAdapter;
+
 import com.example.noteapp.models.TaskModel;
 import com.example.noteapp.databinding.FragmentNoteBinding;
 import com.example.noteapp.room.MyApp;
@@ -225,12 +214,9 @@ public class NoteFragment extends Fragment {
             getParentFragmentManager().setFragmentResult(REQUEST_KEY, bundle);
             close();
         });
-        binding.ivArrowBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                close();
-                keyboardHide();
-            }
+        binding.ivArrowBack.setOnClickListener(v -> {
+            close();
+            keyboardHide();
         });
     }
 

@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     private void setVisibilityGone(NavController navController) {
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             if (destination.getId() == R.id.note_fragment) {

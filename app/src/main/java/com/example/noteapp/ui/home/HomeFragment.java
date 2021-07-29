@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.noteapp.ui.form.NoteFragment.BUNDLE_KEY;
-import static com.example.noteapp.ui.form.NoteFragment.REQUEST_KEY;
 
 public class HomeFragment extends Fragment implements ItemClickListener {
 
