@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.noteapp.interfaces.ItemClickListener;
+import com.example.noteapp.ItemClickListener;
 import com.example.noteapp.R;
 import com.example.noteapp.models.TaskModel;
 

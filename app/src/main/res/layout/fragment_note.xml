@@ -52,13 +52,30 @@
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <EditText
         android:id="@+id/et_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="start"
-        android:background="@null"
-        android:layout_marginTop="15sp"
         android:layout_marginHorizontal="15dp"
-        android:hint="@string/input_text" />
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="100dp"
+        android:background="@null"
+        android:gravity="start|end"
+        android:hint="@string/input_text"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_voice"
+        android:src="@drawable/ic_baseline_keyboard_voice_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:backgroundTint="?colorPrimary"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
