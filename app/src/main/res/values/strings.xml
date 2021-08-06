@@ -29,4 +29,14 @@
     <string name="listening">Говорите...</string>
     <string name="text_of_error">Введите текст</string>
     <string name="text_of_voice_error">Не удалось распозанть запрос</string>
+    <string name="auth_input_password">Введите пароль!</string>
+    <string name="auth_input_email">Введите Email!</string>
+    <string name="login_failed">Не удалось войти!</string>
+    <string name="login_success">Вход прошел успешно!</string>
+    <string name="auth_failed">Не удалось авторизоваться!</string>
+    <string name="auth_success">Авторизация прошла успешно!</string>
+    <string name="email_send">Письмо отправлено</string>
+    <string name="email_dont_send">Не удалось отправить письмо</string>
+    <string name="send_email_verification">Вам было отправлено письмо с подтверждением</string>
+    <string name="dont_send_email_verification">Не удалось отправить письмо с подтверждением</string>
 </resources>

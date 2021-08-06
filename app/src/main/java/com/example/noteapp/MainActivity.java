@@ -11,12 +11,15 @@ import android.view.Menu;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.example.noteapp.auth.AuthFragment;
+import com.example.noteapp.interfaces.DrawerLocker;
 import com.example.noteapp.utils.PreferencesHelper;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -25,12 +28,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.noteapp.databinding.ActivityMainBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DrawerLocker {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
@@ -39,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences sharedPref;
     public final static int SELECT_PHOTO = 1;
     public final static String SET_IMAGE_KEY = "db";
+    public DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.appBarMain.toolbar);
-        DrawerLayout drawer = binding.drawerLayout;
+        drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -55,8 +61,13 @@ public class MainActivity extends AppCompatActivity {
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            navController.navigate(R.id.authFragment);
+        }
         prefHelper.unit(this);
         if (!prefHelper.isShown()) {
+            navController.navigate(R.id.signInFragment);
+            navController.navigate(R.id.authFragment);
             navController.navigate(R.id.on_board_fragment);
         }
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
@@ -72,9 +83,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void setVisibilityGone(NavController navController) {
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            if (destination.getId() == R.id.note_fragment) {
+            if (destination.getId() == R.id.note_fragment || destination.getId() == R.id.signInFragment ||
+                    destination.getId() == R.id.authFragment || destination.getId() == R.id.authFragment
+                    || destination.getId() == R.id.on_board_fragment
+                    || destination.getId() == R.id.forgotPassFragment) {
                 binding.appBarMain.toolbar.setVisibility(View.GONE);
-
             } else {
                 binding.appBarMain.toolbar.setVisibility(View.VISIBLE);
             }
@@ -161,5 +174,14 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    public void setDrawerLocked(boolean shouldLock) {
+        if (shouldLock) {
+            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        } else {
+            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        }
     }
 }

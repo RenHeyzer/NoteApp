@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.example.noteapp.ItemClickListener;
+import com.example.noteapp.interfaces.ItemClickListener;
 import com.example.noteapp.R;
 import com.example.noteapp.models.TaskModel;
 import com.example.noteapp.adapters.TaskAdapter;

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    tools:context=".auth.AuthFragment">
+
+    <TextView
+        android:id="@+id/txt_createAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="50dp"
+        android:text="Create Account"
+        android:textColor="@color/white"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_inputBlow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="2dp"
+        android:text="Please fill the input blow here"
+        android:textColor="@color/gray"
+        android:textSize="21sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_createAccount" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilFullName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:counterMaxLength="15"
+        app:errorEnabled="true"
+        app:layout_constraintTop_toBottomOf="@id/txt_inputBlow">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_fullName"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="15dp"
+            android:background="@null"
+            android:drawableStart="@drawable/ic_baseline_person_outline_24"
+            android:drawablePadding="10dp"
+            android:hint="FULL NAME"
+            android:inputType="text"
+            android:maxLength="15"
+            android:paddingHorizontal="20dp"
+            android:singleLine="true"
+            android:textColor="@color/whiteGray" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        app:counterMaxLength="20"
+        app:errorEnabled="true"
+        app:layout_constraintTop_toBottomOf="@id/tilFullName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_phoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="15dp"
+            android:background="@null"
+            android:drawableStart="@drawable/ic_baseline_phone_android_24"
+            android:drawablePadding="10dp"
+            android:hint="PHONE"
+            android:inputType="number"
+            android:maxLength="20"
+            android:paddingHorizontal="20dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        app:counterMaxLength="35"
+        app:errorEnabled="true"
+        app:layout_constraintTop_toBottomOf="@id/tilNumber">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_gmail"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="15dp"
+            android:background="@null"
+            android:drawableStart="@drawable/ic_baseline_mail_outline_24"
+            android:drawablePadding="10dp"
+            android:hint="EMAIL"
+            android:inputType="textEmailAddress"
+            android:maxLength="35"
+            android:paddingHorizontal="20dp"
+            android:singleLine="true" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        app:counterMaxLength="20"
+        app:errorEnabled="true"
+        app:layout_constraintTop_toBottomOf="@id/tilEmail"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="15dp"
+            android:background="@null"
+            android:drawableStart="@drawable/ic_baseline_password_lock"
+            android:drawablePadding="14dp"
+            android:hint="PASSWORD"
+            android:inputType="textPassword"
+            android:maxLength="20"
+            android:paddingHorizontal="23dp"
+            android:singleLine="true" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilConfirmPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        app:counterMaxLength="20"
+        app:errorEnabled="true"
+        app:layout_constraintTop_toBottomOf="@id/tilPassword"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_confirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="15dp"
+            android:background="@null"
+            android:drawableStart="@drawable/ic_baseline_password_lock"
+            android:drawablePadding="14dp"
+            android:hint="CONFIRM PASSWORD"
+            android:inputType="textPassword"
+            android:maxLength="20"
+            android:paddingHorizontal="23dp"
+            android:singleLine="true" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_signUp"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginHorizontal="90dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="70dp"
+        android:background="@drawable/background_of_micro"
+        android:backgroundTint="@color/support"
+        android:text="Sign up"
+        android:textColor="@color/background"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tilConfirmPassword"
+        app:layout_constraintVertical_bias="0.489"
+        tools:layout_editor_absoluteX="90dp" />
+
+    <TextView
+        android:id="@+id/txt_alreadyHaveAnAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="90dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="40dp"
+        android:fontFamily="@font/poppins_light"
+        android:text="Already have an account?"
+        android:textColor="@color/gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_signUp" />
+
+    <TextView
+        android:id="@+id/txt_signIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="44dp"
+        android:text="Sign in"
+        android:textColor="@color/support"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/txt_alreadyHaveAnAccount"
+        app:layout_constraintTop_toBottomOf="@id/btn_signUp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

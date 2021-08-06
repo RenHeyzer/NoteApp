@@ -188,8 +188,6 @@ public class NoteFragment extends Fragment {
     }
 
     private void initClickListener() {
-        NavController navController = Navigation.findNavController(
-                requireActivity(), R.id.nav_host_fragment_content_main);
         binding.txtDone.setOnClickListener(v -> {
             if (binding.etTitle.getText().toString().trim().equals("")) {
                 binding.etTitle.setError(getString(R.string.text_of_error));

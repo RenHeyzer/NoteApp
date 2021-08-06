@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.example.noteapp.adapters.ViewPagerAdapter;
 import com.example.noteapp.databinding.FragmentOnBoardBinding;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 public class OnBoardFragment extends Fragment {
 
@@ -31,9 +32,11 @@ public class OnBoardFragment extends Fragment {
     }
 
     private void setupViewPager() {
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
-        binding.viewPager.setAdapter(viewPagerAdapter);
-        binding.tabLayout.setupWithViewPager(binding.viewPager, true);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getActivity().
+                getSupportFragmentManager(), getLifecycle());
+        binding.viewPager2.setAdapter(viewPagerAdapter);
+        new TabLayoutMediator(binding.tabLayout, binding.viewPager2,
+                (tab, position) -> {}).attach();
     }
 }
 

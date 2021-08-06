@@ -1,5 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/NoteApp/app/src/main/res/drawable-v24/default_dot.xml" value="0.24166666666666667" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/NoteApp/app/src/main/res/drawable/background_of_choose.xml" value="0.25092592592592594" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/NoteApp/app/src/main/res/drawable/ic_baseline_mail_outline_24.xml" value="0.23796296296296296" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/NoteApp/app/src/main/res/drawable/ic_baseline_password_lock.xml" value="0.23796296296296296" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/NoteApp/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.23796296296296296" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/NoteApp/app/src/main/res/drawable/ic_baseline_person_outline_24.xml" value="0.23796296296296296" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/NoteApp/app/src/main/res/drawable/ic_baseline_phone_android_24.xml" value="0.23796296296296296" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/NoteApp/app/src/main/res/drawable/selected_dot.xml" value="0.24166666666666667" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/NoteApp/app/src/main/res/drawable/side_nav_bar.xml" value="0.24166666666666667" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/NoteApp/app/src/main/res/drawable/tab_selector.xml" value="0.24166666666666667" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/NoteApp/app/src/main/res/layout/activity_main.xml" value="0.12360688956433637" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/NoteApp/app/src/main/res/layout/fragment_auth.xml" value="0.264" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/NoteApp/app/src/main/res/layout/fragment_first.xml" value="0.12360688956433637" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/NoteApp/app/src/main/res/layout/fragment_forgot_pass.xml" value="0.22192028985507245" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/NoteApp/app/src/main/res/layout/fragment_gallery.xml" value="0.12360688956433637" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/NoteApp/app/src/main/res/layout/fragment_home.xml" value="0.12360688956433637" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/NoteApp/app/src/main/res/layout/fragment_note.xml" value="0.12360688956433637" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/NoteApp/app/src/main/res/layout/fragment_on_board.xml" value="0.2" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/NoteApp/app/src/main/res/layout/fragment_second.xml" value="0.12360688956433637" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/NoteApp/app/src/main/res/layout/fragment_share.xml" value="0.12360688956433637" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/NoteApp/app/src/main/res/layout/fragment_sign_in.xml" value="0.264" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/NoteApp/app/src/main/res/menu/activity_main_drawer.xml" value="0.13489583333333333" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/NoteApp/app/src/main/res/menu/main.xml" value="0.13489583333333333" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

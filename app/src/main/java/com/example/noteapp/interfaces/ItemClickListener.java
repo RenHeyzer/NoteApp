@@ -1,4 +1,4 @@
-package com.example.noteapp;
+package com.example.noteapp.interfaces;
 
 import com.example.noteapp.models.TaskModel;
 
