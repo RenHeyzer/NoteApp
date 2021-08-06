@@ -1,5 +1,7 @@
 package com.example.noteapp.ui.home;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,6 +20,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.bumptech.glide.Glide;
+import com.example.noteapp.MainActivity;
 import com.example.noteapp.interfaces.ItemClickListener;
 import com.example.noteapp.R;
 import com.example.noteapp.models.TaskModel;
@@ -66,14 +70,28 @@ public class HomeFragment extends Fragment implements ItemClickListener {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                int position = viewHolder.getAdapterPosition();
-                TaskModel mtaskModel = adapter.getWordAtPosition(position);
-                MyApp.getInstance().taskDao().delete(mtaskModel);
-
+                AlertDialog alertDialog = new AlertDialog.Builder(viewHolder.itemView.getContext()).create();
+                alertDialog.setTitle(getString(R.string.text_of_dialog));
+                alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Нет", (dialog, which) -> {
+                    int position = viewHolder.getAdapterPosition();
+                    adapter.notifyItemChanged(position);
+                });
+                alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Да", (dialog, which) -> {
+                    int position = viewHolder.getAdapterPosition();
+                    TaskModel mtaskModel = adapter.getWordAtPosition(position);
+                    MyApp.getInstance().taskDao().delete(mtaskModel);
+                    adapter.notifyItemRemoved(position);
+                    dialog.cancel();
+                });
+                alertDialog.show();
             }
         });
         touchHelper.attachToRecyclerView(binding.rvRecycler);
     }
+
+
+
+
 
     private void getNotesFromDB() {
         MyApp.getInstance().taskDao().getAll().observe(requireActivity(), new Observer<List<TaskModel>>() {

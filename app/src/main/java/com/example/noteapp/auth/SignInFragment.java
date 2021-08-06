@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 
 import android.text.TextUtils;
@@ -89,7 +90,8 @@ public class SignInFragment extends Fragment {
                                 Toast.LENGTH_SHORT).show();
                         NavController navController = Navigation.findNavController(
                                 requireActivity(), R.id.nav_host_fragment_content_main);
-                        navController.navigate(R.id.nav_home);
+                        navController.popBackStack(R.id.authFragment, true);
+                        close();
                     } else {
                         Log.w("TAG", "signInWithEmailAndPassword:failure",
                                 task.getException());
@@ -125,6 +127,7 @@ public class SignInFragment extends Fragment {
         NavController navController = Navigation.findNavController(requireActivity(),
                 R.id.nav_host_fragment_content_main);
         navController.navigateUp();
+        getActivity().getSupportFragmentManager().popBackStack();
     }
 
     @Override

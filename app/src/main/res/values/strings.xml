@@ -25,6 +25,7 @@
     <string name="text_of_third_fragment">Куча функций и интересных фишек</string>
     <string name="text_of_second_fragment">Быстрый, качественный продукт</string>
     <string name="text_of_dialog">Удалить фото профиля?</string>
+    <string name="text_of_room_dialog">Удалить заметку?</string>
     <string name="delete_data_massage">Удалить фото профиля?</string>
     <string name="listening">Говорите...</string>
     <string name="text_of_error">Введите текст</string>

@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements DrawerLocker {
         });
         imageView.setOnLongClickListener(v -> {
             AlertDialog alertDialog = new AlertDialog.Builder(imageView.getContext()).create();
-            alertDialog.setTitle(getString(R.string.text_of_dialog));
+            alertDialog.setTitle(getString(R.string.text_of_room_dialog));
             alertDialog.setButton(android.app.AlertDialog.BUTTON_POSITIVE, "Нет", (dialog, which) -> {
 
             });
